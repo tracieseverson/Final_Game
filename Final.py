@@ -6,6 +6,7 @@ import random
 from obstacle_1 import Obstacle1
 
 pygame.init()
+clock = pygame.time.Clock()
 
 background_tile = pygame.image.load("images/water_tile.png")
 water_rect = background_tile.get_rect()
@@ -60,6 +61,7 @@ while True:
     x_position= random.randint(0,600)
     speed = 1
     y_position += speed
+    #can you make these obstacles sprites like in our alien invasion game?
     obs = Obstacle1(2,[x_position, y_position])
     obs_list.append(obs)
     for course in obs_list:
@@ -68,4 +70,5 @@ while True:
     collision = pygame.sprite.collide_rect(player1, obs)
     if collision:
         player1.health -= 1
+    clock.tick(60)
     pygame.display.flip()
