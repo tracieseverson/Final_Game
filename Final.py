@@ -1,7 +1,9 @@
 import pygame
 import sys
 from ship_1 import Ship1
-from ship_2 import Ship2
+from test_obstacle import Ship2
+import random
+from obstacle_1 import Obstacle1
 
 pygame.init()
 
@@ -31,7 +33,12 @@ y=520
 #first obstacle
 obstacle = Ship2()
 position_y = 0
+position_x = random.randint(0,600)
 
+#obstacle
+clock = pygame.time.Clock()
+speed = 1
+obs_list = []
 
 while True:
     for event in pygame.event.get():
@@ -48,5 +55,17 @@ while True:
     player1_rect = player1.rect
     #player1.draw(screen)
     screen.blit(player1.image, (x,y))
-    screen.blit(obstacle.image,(0,position_y))
+    screen.blit(obstacle.image,(position_x,position_y))
+    y_position = 0
+    x_position= random.randint(0,600)
+    speed = 1
+    y_position += speed
+    obs = Obstacle1(2,[x_position, y_position])
+    obs_list.append(obs)
+    for course in obs_list:
+        course.draw(screen)
+        course.drop(speed)
+    collision = pygame.sprite.collide_rect(player1, obs)
+    if collision:
+        player1.health -= 1
     pygame.display.flip()

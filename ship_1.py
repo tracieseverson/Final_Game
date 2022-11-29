@@ -3,11 +3,14 @@ import sys
 
 class Ship1:
     def __init__(self):
-        self.image = pygame.image.load("images/player_1.png")
+        self.image = pygame.image.load("images/ship1.png")
+        self.dead_image = pygame.image.load('images/player_1.png')
         self.rect = self.image.get_rect()
         # movement flags
         self.moving_right = False
         self.moving_left = False
+        self.health = 700
+
 
     def _check_events(self):
         """Respond to keypresses and mouse events"""
@@ -50,4 +53,8 @@ class Ship1:
         # update rect object from self.x.
       #  self.rect.x = self.x
     def draw(self, surface):
+        if self.health <=300:
+            self.image = self.image
+        if self.health <= 0:
+            self.image = self.dead_image
         surface.blit(self.image, self.rect)

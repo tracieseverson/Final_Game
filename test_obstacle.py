@@ -2,7 +2,7 @@ import pygame
 
 class Ship2:
     def __init__(self):
-        self.image = pygame.image.load("images/player_2.png")
+        self.image = pygame.image.load("images/obstacle1.png")
         self.rect = self.image.get_rect()
 
     def move(self):
